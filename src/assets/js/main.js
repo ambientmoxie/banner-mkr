@@ -22,53 +22,64 @@ import Draggabilly from "draggabilly";
 //   URL.revokeObjectURL(url);
 // });
 
-// vanilla JS
-var grid = document.querySelector("#timeline-area__blocks");
-console.log(grid);
-// initialize with element
-var pckry = new Packery(grid, {
+// Packery is initialized.
+// We are using DOM element as gutter value and column width.
+// The use of percentage is enable.
+const grid = document.querySelector("#timeline-area__blocks");
+
+const pckry = new Packery(grid, {
   itemSelector: ".timeline-area__block",
   gutter: ".gutter-sizer",
   columnWidth: ".timeline-area__block",
   percentPosition: true,
 });
 
-// make all items draggable
+// Draggabilly is initialized and bound to Packery
+// to make all available blocks draggable by the user.
 grid.querySelectorAll(".timeline-area__block").forEach(function (itemElem) {
-  var draggie = new Draggabilly(itemElem);
+  const draggie = new Draggabilly(itemElem);
   // bind Draggabilly events to Packery
   pckry.bindDraggabillyEvents(draggie);
 });
 
-// Function to update data-order attributes
+// Because the elements can be moved but the node structure remains the same,
+// I need to keep track of the block positions to generate a usable GSAP timeline.
+// This function adds a data-order attribute to each item to do this.
 function updateOrderAttributes() {
   pckry.getItemElements().forEach((item, index) => {
     item.setAttribute("data-order", index + 1);
   });
 }
 
+// Apply order on first load
 updateOrderAttributes();
+// Apply order after an element has been moved
 pckry.on("dragItemPositioned", updateOrderAttributes);
-
-// Add item
 
 const addButton = document.querySelector("#timeline-area__add-btn");
 
-addButton.addEventListener("click", () => {
+function createBlockType(type) {
   const item = document.createElement("div");
   item.className = "timeline-area__block";
-  item.setAttribute("data-type", "logo");
-  item.innerHTML = `<img src="/icons/logo-ico.svg" alt="logo icon">
-  <span>Logo</span>`;
+
+  item.setAttribute("data-type", `${type}`);
+  item.innerHTML = `<img src="/icons/${type}-ico.svg" alt="${type} icon">
+                    <span>${type}</span>`;
+
+  return item;
+}
+
+addButton.addEventListener("click", () => {
+  const newItem = createBlockType("image");
 
   // Append item to grid
-  grid.appendChild(item);
+  grid.appendChild(newItem);
 
   // Tell Packery about the new item
-  pckry.appended(item);
+  pckry.appended(newItem);
 
   // Make the new item draggable
-  var draggie = new Draggabilly(item);
+  const draggie = new Draggabilly(newItem);
   pckry.bindDraggabillyEvents(draggie);
 
   // Update the order attributes
