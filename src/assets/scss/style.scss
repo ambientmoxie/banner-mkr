@@ -145,10 +145,14 @@ section > * {
   padding-bottom: $spacing-rg;
 }
 #timeline-area__blocks {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: $spacing-rg;
+  width: 100%;
+  // height: 200px !important;
+  // display: grid;
+  // grid-template-columns: repeat(3, 1fr);
+  
+  // gap: $spacing-rg;
   .timeline-area__block {
+    width: 32%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -160,3 +164,11 @@ section > * {
     border: 1px solid $color-light-grey;
   }
 }
+
+// Packery grid
+
+.gutter-sizer {
+  width: 2%;
+}
+
+// .grid-item { width: 25%; }
