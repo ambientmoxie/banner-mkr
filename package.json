@@ -11,6 +11,7 @@
     "network": "vite --host"
   },
   "devDependencies": {
+    "normalize.css": "^8.0.1",
     "sass": "^1.64.2",
     "vite": "^4.4.5"
   }

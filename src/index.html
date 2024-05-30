@@ -14,29 +14,42 @@
           alt="banner.mkr illustration"
         />
         <h1 id="bmkr-header__wording">
-          banner.mkr is a simple tool to create and download simple animated
+          <span>banner.mkr</span> is a simple tool to create and download simple animated
           banner
         </h1>
       </header>
       <main id="timeline-area">
-        <h2 id="timeline-area__wording"></h2>
-        <div id="timeline-area__blocks">
-          <div class="timeline-area__block">1</div>
-          <div class="timeline-area__block">2</div>
-          <div class="timeline-area__block">3</div>
-          <div class="timeline-area__block">4</div>
-          <div class="timeline-area__block">5</div>
-        </div>
-        <div id="timeline-area__buttons">
-          <button id="timeline-area__add-btn" aria-label="Add Block">Add</button>
-          <button id="timeline-area__dlt-btn" aria-label="Delete Block">Delete</button>
-          <button id="timeline-area__edt-btn" aria-label="Edit Block">Edit</button>
-        </div>
+        <section>
+          <h2 id="timeline-area__wording">Timeline current stack:</h2>
+          <div id="timeline-area__blocks">
+            <div class="timeline-area__block">
+              <img src="/icons/logo-ico.svg" alt="logo icon">
+              <span>Logo</span>
+            </div>
+            <div class="timeline-area__block">
+              <img src="/icons/image-ico.svg" alt="image icon">
+              <span>Image</span>
+            </div>
+            <div class="timeline-area__block">
+              <img src="/icons/carousel-ico.svg" alt="carousel icon">
+              <span>Carousel</span>
+            </div>
+            <div class="timeline-area__block">
+              <img src="/icons/text-ico.svg" alt="text icon">
+              <span>Text</span>
+            </div>
+          </div>
+          <div id="timeline-area__buttons">
+            <button class="timeline-area__btn" id="timeline-area__add-btn" aria-label="Add Block">Add</button>
+            <button class="timeline-area__btn" id="timeline-area__delete-btn" aria-label="Delete Block">Delete</button>
+            <button class="timeline-area__btn" id="timeline-area__edit-btn" aria-label="Edit Block">Edit</button>
+          </div>
+        </section>
       </main>
 
       <footer id="bmkr-footer">
-        <div id="bmkr-footer__wording"></div>
-        <button id="bmkr-footer__dwnld-btn" aria-label="Download Banner">Download</button>
+        <h2 id="bmkr-footer__wording">Is your banner ready?</h2>
+        <button id="bmkr-footer__download-button" aria-label="Download Banner">Download</button>
       </footer>
     </div>
 
