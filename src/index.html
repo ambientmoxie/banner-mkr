@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>banner maker</title>
+  </head>
+  <body>
+    <div id="bmkr-container">
+      <header id="bmkr-header">
+        <img
+          id="bmkr-header__illustration"
+          src="/illustration.png"
+          alt="banner.mkr illustration"
+        />
+        <h1 id="bmkr-header__wording">
+          banner.mkr is a simple tool to create and download simple animated
+          banner
+        </h1>
+      </header>
+      <main id="timeline-area">
+        <h2 id="timeline-area__wording"></h2>
+        <div id="timeline-area__blocks">
+          <div class="timeline-area__block">1</div>
+          <div class="timeline-area__block">2</div>
+          <div class="timeline-area__block">3</div>
+          <div class="timeline-area__block">4</div>
+          <div class="timeline-area__block">5</div>
+        </div>
+        <div id="timeline-area__buttons">
+          <button id="timeline-area__add-btn" aria-label="Add Block">Add</button>
+          <button id="timeline-area__dlt-btn" aria-label="Delete Block">Delete</button>
+          <button id="timeline-area__edt-btn" aria-label="Edit Block">Edit</button>
+        </div>
+      </main>
+
+      <footer id="bmkr-footer">
+        <div id="bmkr-footer__wording"></div>
+        <button id="bmkr-footer__dwnld-btn" aria-label="Download Banner">Download</button>
+      </footer>
+    </div>
+
+    <script type="module" src="./assets/js/main.js"></script>
+  </body>
+</html>
