@@ -47,12 +47,5 @@ function updateOrderAttributes() {
   });
 }
 
-// Initial update of data-order attributes
 updateOrderAttributes();
-
-// Listen for the layoutComplete event to update data-order attributes
-pckry.on("layoutComplete", () => {
-  setTimeout(() => {
-    updateOrderAttributes();
-  }, 1000);
-});
+pckry.on("dragItemPositioned", updateOrderAttributes);
