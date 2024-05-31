@@ -88,7 +88,7 @@ addButton.addEventListener("click", (e) => {
   
   // Edit style depending on if selector is visible or not
   selectorContainer.classList.toggle("isVisible");
-  const isSelectorVisible = selectorContainer.classList.contains("isVisible");
+  // const isSelectorVisible = selectorContainer.classList.contains("isVisible");
   e.target.classList.toggle("isActive");
   // e.target.innerText = isSelectorVisible
   //   ? "Hide frame selector"
