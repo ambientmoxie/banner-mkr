@@ -20,6 +20,7 @@ $font-size-sm: 1.2rem;
 $color-black: #282828;
 $color-white: #f2f2f2;
 $color-accent: #4285f4;
+$color-forbidden: #b70b0b;
 $color-dark-grey: #666666;
 $color-light-grey: #cccccc;
 
@@ -95,14 +96,12 @@ input[type="reset"] {
 
 button {
   width: 100%;
+  height: 4rem;
   font-size: $font-size-sm;
   padding: 10px 0;
   border-radius: 5px;
-
-  &.timeline-area__btn {
-    color: $color-black;
-    border: 1px solid $color-light-grey;
-  }
+  color: $color-black;
+  border: 1px solid $color-light-grey;
 
   &#bmkr-footer__download-button {
     color: $color-accent;
@@ -169,4 +168,34 @@ section > * {
   width: 2%;
 }
 
-// .grid-item { width: 25%; }
+aside {
+  width: 110px;
+  position: fixed;
+  bottom: $spacing-md;
+  right: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.25s ease;
+
+  &.isVisible {
+    right: $spacing-md;
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 $spacing-rg;
+  }
+
+  button:not(:last-of-type) {
+    margin-bottom: $spacing-rg;
+  }
+}
+
+.isActive {
+  border: 1px solid $color-forbidden;
+  color: $color-forbidden;
+}

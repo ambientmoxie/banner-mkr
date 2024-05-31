@@ -26,6 +26,7 @@ import Draggabilly from "draggabilly";
 // We are using DOM element as gutter value and column width.
 // The use of percentage is enable.
 const grid = document.querySelector("#timeline-area__blocks");
+let deleteMode = false;
 
 const pckry = new Packery(grid, {
   itemSelector: ".timeline-area__block",
@@ -34,13 +35,30 @@ const pckry = new Packery(grid, {
   percentPosition: true,
 });
 
-// Draggabilly is initialized and bound to Packery
-// to make all available blocks draggable by the user.
-grid.querySelectorAll(".timeline-area__block").forEach(function (itemElem) {
-  const draggie = new Draggabilly(itemElem);
+// Function to make items draggable and removable
+function makeItemInteractive(itemElem) {
+  var draggie = new Draggabilly(itemElem);
   // bind Draggabilly events to Packery
   pckry.bindDraggabillyEvents(draggie);
-});
+
+  // Add click event listener to remove the item
+  itemElem.addEventListener("click", function () {
+    if (deleteMode) {
+      if (pckry.items.length > 1) {
+        // Remove the item from Packery
+        pckry.remove(itemElem);
+        // Remove the item from the DOM
+        itemElem.parentNode.removeChild(itemElem);
+        // Re-layout Packery
+        pckry.layout();
+        // Update the order attributes
+        updateOrderAttributes();
+      } else {
+        alert("you cannot delete the last item");
+      }
+    }
+  });
+}
 
 // Because the elements can be moved but the node structure remains the same,
 // I need to keep track of the block positions to generate a usable GSAP timeline.
@@ -53,35 +71,67 @@ function updateOrderAttributes() {
 
 // Apply order on first load
 updateOrderAttributes();
+
+// Make all existing items interactive
+grid.querySelectorAll(".timeline-area__block").forEach(makeItemInteractive);
+
 // Apply order after an element has been moved
 pckry.on("dragItemPositioned", updateOrderAttributes);
 
 const addButton = document.querySelector("#timeline-area__add-btn");
 
+// Reveal the selector allowing to add frames
+const selectorContainer = document.querySelector("aside");
+const selectors = selectorContainer.querySelectorAll("button");
+
+addButton.addEventListener("click", (e) => {
+  
+  // Edit style depending on if selector is visible or not
+  selectorContainer.classList.toggle("isVisible");
+  const isSelectorVisible = selectorContainer.classList.contains("isVisible");
+  e.target.classList.toggle("isActive");
+  // e.target.innerText = isSelectorVisible
+  //   ? "Hide frame selector"
+  //   : "Show frame selector";
+});
+
+// We are using the select type to generate the corresponding block
 function createBlockType(type) {
-  const item = document.createElement("div");
-  item.className = "timeline-area__block";
-
-  item.setAttribute("data-type", `${type}`);
-  item.innerHTML = `<img src="/icons/${type}-ico.svg" alt="${type} icon">
-                    <span>${type}</span>`;
-
-  return item;
+  const block = document.createElement("div");
+  block.className = "timeline-area__block";
+  block.setAttribute("data-type", `${type}`);
+  block.innerHTML = `<img src="/icons/${type}-ico.svg" alt="${type} icon"><span>${type}</span>`;
+  return block;
 }
 
-addButton.addEventListener("click", () => {
-  const newItem = createBlockType("image");
+// This part add block depending on it's type
+Array.from(selectors).forEach((selector) => {
+  selector.addEventListener("click", () => {
+    // Get the type of item to create
+    const type = selector.getAttribute("data-type");
+    // Create the item
+    const newBlock = createBlockType(type);
+    // Append item to grid
+    grid.appendChild(newBlock);
+    // Tell Packery about the new item
+    pckry.appended(newBlock);
+    // Make the new item draggable
+    makeItemInteractive(newBlock);
+    // Update the order attributes
+    updateOrderAttributes();
+  });
+});
 
-  // Append item to grid
-  grid.appendChild(newItem);
 
-  // Tell Packery about the new item
-  pckry.appended(newItem);
+// Enable delete mode
+const deleteButton = document.querySelector("#timeline-area__delete-btn");
 
-  // Make the new item draggable
-  const draggie = new Draggabilly(newItem);
-  pckry.bindDraggabillyEvents(draggie);
+deleteButton.addEventListener("click", (e) => {
+  deleteMode = !deleteMode;
 
-  // Update the order attributes
-  updateOrderAttributes();
+  // Edit style depending on if delete mode is true are false
+  e.target.classList.toggle("isActive");
+  e.target.innerText = deleteMode
+    ? "Disable delete mode"
+    : "Enable delete mode";
 });
