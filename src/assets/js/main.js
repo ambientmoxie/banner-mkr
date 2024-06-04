@@ -3,24 +3,45 @@ import createDoctype from "./doctype";
 import Packery from "packery";
 import Draggabilly from "draggabilly";
 
-// document.querySelector("button").addEventListener("click", () => {
-//   // Create a basic HTML node structure, links to the GSAP library, and gsap timeline.
-//   let htmlContent = createDoctype();
+const downloadBtn = document.getElementById("bmkr-footer__download-button");
 
-//   // Update the node structure depending on user choices.
-//   const additionalContent = "<p> hello </p>";
-//   htmlContent = htmlContent.replace("</body>", `${additionalContent} </body>`);
+downloadBtn.addEventListener("click", () => {
+  parseTimeline();
 
-//   const blob = new Blob([htmlContent], { type: "text/html" });
-//   const url = URL.createObjectURL(blob);
-//   const a = document.createElement("a");
-//   a.href = url;
-//   a.download = "document.html";
-//   document.body.appendChild(a);
-//   a.click();
-//   document.body.removeChild(a);
-//   URL.revokeObjectURL(url);
-// });
+  // // Create a basic HTML node structure, links to the GSAP library, and gsap timeline.
+  // let htmlContent = createDoctype();
+
+  // // Update the node structure depending on user choices.
+  // const additionalContent = "<p> hello </p>";
+  // htmlContent = htmlContent.replace("</body>", `${additionalContent} </body>`);
+
+  // const blob = new Blob([htmlContent], { type: "text/html" });
+  // const url = URL.createObjectURL(blob);
+  // const a = document.createElement("a");
+  // a.href = url;
+  // a.download = "document.html";
+  // document.body.appendChild(a);
+  // a.click();
+  // document.body.removeChild(a);
+  // URL.revokeObjectURL(url);
+});
+
+function parseTimeline() {
+  const reorderedBlocks = [];
+  const timeline = document.getElementById("timeline-area__blocks");
+  const blocks = Array.from(timeline.querySelectorAll(".timeline-area__block"));
+
+  blocks.forEach((block, index) => {
+    const blockIndex = parseInt(block.getAttribute("data-order"));
+    const blockType = block.getAttribute("data-type");
+    reorderedBlocks[blockIndex] = blockType;
+  });
+  console.log(reorderedBlocks);
+}
+
+// function updateNodeStructure(){
+
+// }
 
 // Packery is initialized.
 // We are using DOM element as gutter value and column width.
@@ -65,7 +86,7 @@ function makeItemInteractive(itemElem) {
 // This function adds a data-order attribute to each item to do this.
 function updateOrderAttributes() {
   pckry.getItemElements().forEach((item, index) => {
-    item.setAttribute("data-order", index + 1);
+    item.setAttribute("data-order", index);
   });
 }
 
@@ -85,7 +106,6 @@ const selectorContainer = document.querySelector("aside");
 const selectors = selectorContainer.querySelectorAll("button");
 
 addButton.addEventListener("click", (e) => {
-  
   // Edit style depending on if selector is visible or not
   selectorContainer.classList.toggle("isVisible");
   // const isSelectorVisible = selectorContainer.classList.contains("isVisible");
@@ -121,7 +141,6 @@ Array.from(selectors).forEach((selector) => {
     updateOrderAttributes();
   });
 });
-
 
 // Enable delete mode
 const deleteButton = document.querySelector("#timeline-area__delete-btn");
