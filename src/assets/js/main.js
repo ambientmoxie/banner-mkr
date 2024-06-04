@@ -6,42 +6,145 @@ import Draggabilly from "draggabilly";
 const downloadBtn = document.getElementById("bmkr-footer__download-button");
 
 downloadBtn.addEventListener("click", () => {
-  parseTimeline();
+  // Create a basic HTML node structure, links to the GSAP library, and gsap timeline.
+  let htmlContent = createDoctype();
 
-  // // Create a basic HTML node structure, links to the GSAP library, and gsap timeline.
-  // let htmlContent = createDoctype();
+  // Update the node structure depending on user choices.
+  htmlContent = updateNodeStructure(htmlContent);
 
-  // // Update the node structure depending on user choices.
-  // const additionalContent = "<p> hello </p>";
-  // htmlContent = htmlContent.replace("</body>", `${additionalContent} </body>`);
-
-  // const blob = new Blob([htmlContent], { type: "text/html" });
-  // const url = URL.createObjectURL(blob);
-  // const a = document.createElement("a");
-  // a.href = url;
-  // a.download = "document.html";
-  // document.body.appendChild(a);
-  // a.click();
-  // document.body.removeChild(a);
-  // URL.revokeObjectURL(url);
+  const blob = new Blob([htmlContent], { type: "text/html" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "document.html";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
 });
 
 function parseTimeline() {
-  const reorderedBlocks = [];
+  // Select the timeline area
   const timeline = document.getElementById("timeline-area__blocks");
-  const blocks = Array.from(timeline.querySelectorAll(".timeline-area__block"));
-
-  blocks.forEach((block, index) => {
+  // Get all the blocks
+  const unorderedBlocks = Array.from(
+    timeline.querySelectorAll(".timeline-area__block")
+  );
+  // Init an empty array that will contains all the block in the correct order
+  const orderedBlocks = [];
+  // Loop through all the block in the unordered array
+  // and sort them inside a new array of ordered blocks
+  unorderedBlocks.forEach((block) => {
     const blockIndex = parseInt(block.getAttribute("data-order"));
     const blockType = block.getAttribute("data-type");
-    reorderedBlocks[blockIndex] = blockType;
+    orderedBlocks[blockIndex] = blockType;
   });
-  console.log(reorderedBlocks);
+  return orderedBlocks;
 }
 
-// function updateNodeStructure(){
+function updateNodeStructure(htmlContent) {
+  const frames = parseTimeline();
+  let additionalJavacript;
+  let additionalHtml;
 
-// }
+  frames.forEach((frame) => {
+    switch (frame) {
+      case "logo":
+        console.log("check");
+        additionalJavacript = `
+        tl.fromTo("#logo-frame", { x: 0, opacity: 1 }, { x: 0, opacity: 0 }),
+        tl.fromTo("#frame-logo__header", { top: -header.height }, { top: 0 }),`;
+        additionalHtml = `
+        <div id="frame-logo__header">
+          <img id="logo-header" src="https://maximebenoit.work/projects/banner-mkr/banner-assets/logo-secondary.svg" alt="logo" />
+        </div>
+        <div id="frame-logo">
+          <img id="logo-frame" src="https://maximebenoit.work/projects/banner-mkr/banner-assets/logo.svg" alt="logo" />
+        </div>  
+        `;
+        break;
+      case "image":
+        additionalJavacript = `
+        tl.fromTo("#frame-${frame}",
+        { x: 300, ease: EASE, duration: DURATION, delay: DELAY },
+        { x: 0, ease: EASE, duration: DURATION, delay: DELAY }
+        ),`;
+        additionalHtml = `
+        <div id="frame-image">
+          <img src="https://maximebenoit.work/projects/banner-mkr/banner-assets/image.jpg" alt="single image" />
+        </div>    
+        `;
+        break;
+      case "text":
+        additionalJavacript = `
+        tl.fromTo("#frame-${frame}",
+        { x: 300, ease: EASE, duration: DURATION, delay: DELAY },
+        { x: 0, ease: EASE, duration: DURATION, delay: DELAY }
+        ),`;
+        additionalHtml = `
+        <div id="frame-text">
+          <p>
+            Donec ipsum nibh, tempus at leo non, pulvinar gravida ipsum.
+            Pellentesque elit lectus, semper ut dignissim. <br /><br />
+            <strong>
+              Pellentesque ac eros tristique, suscipit risus a, sodales nisi.
+              Praesent tempor magna at bibendum congue.
+            </strong>
+          </p>
+          <p><strong> Money for nothing.</strong></p>
+        </div>`;
+        break;
+      case "carousel":
+        additionalJavacript = `
+          tl.fromTo("#frame-${frame}",
+          { x: 300, ease: EASE, duration: DURATION, delay: DELAY },
+          { x: 0, ease: EASE, duration: DURATION, delay: DELAY }
+          ),`;
+        additionalHtml = `
+        <div id="frame-carousel">
+          <div class="carousel-cell">
+            <img src="https://maximebenoit.work/projects/banner-mkr/banner-assets/image-carousel-1.jpg" alt="image-carousel"/>
+          </div>
+          <div class="carousel-cell">
+            <img src="https://maximebenoit.work/projects/banner-mkr/banner-assets/image-carousel-2.jpg" alt="image-carousel"/>
+          </div>
+          <div class="carousel-cell">
+            <img src="https://maximebenoit.work/projects/banner-mkr/banner-assets/image-carousel-3.jpg" alt="image-carousel"/>
+          </div>
+        </div>`;
+        break;
+      case "cta":
+        additionalJavacript = `
+          tl.fromTo("#frame-${frame}",
+          { x: 300, ease: EASE, duration: DURATION, delay: DELAY },
+          { x: 0, ease: EASE, duration: DURATION, delay: DELAY }
+          ),
+          tl.fromTo("#frame-cta button", {y: 20, opacity: 0 }, { y: 0, opacity: 1 })`;
+        additionalHtml = `
+        <div id="frame-cta">
+          <p>Pellentesque ac eros tristique, suscipit risus a, sodales nisi. <strong>Praesent tempor magna.</strong></p>
+          <button aria-label="call to action">click on this button</button>
+        </div>`;
+        break;
+
+      default:
+        console.log(`${frame} doesn't seems to be a valid frame :)`);
+        break;
+    }
+
+    // Insert javascript and html
+    htmlContent = htmlContent.replace(
+      "//JS Here",
+      `${additionalJavacript} //JS Here`
+    );
+    htmlContent = htmlContent.replace(
+      "//HTML Here",
+      `${additionalHtml} //HTML Here`
+    );
+  });
+
+  return htmlContent;
+}
 
 // Packery is initialized.
 // We are using DOM element as gutter value and column width.

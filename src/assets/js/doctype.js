@@ -170,82 +170,8 @@ export default function createDoctype() {
       
     <body>
       <div id="container">
-      <!-- Covering header -->
-
-      <div id="frame-logo__header">
-        <img
-          id="logo-header"
-          src="https://maximebenoit.work/projects/banner-mkr/banner-assets/logo-secondary.svg"
-          alt="logo"
-        />
+        //HTML Here
       </div>
-
-      <!-- Frame logo -->
-
-      <div id="frame-logo">
-        <img
-          id="logo-frame"
-          src="https://maximebenoit.work/projects/banner-mkr/banner-assets/logo.svg"
-          alt="logo"
-        />
-      </div>
-
-      <!-- Frame Text -->
-
-      <div id="frame-text">
-        <p>
-          Donec ipsum nibh, tempus at leo non, pulvinar gravida ipsum.
-          Pellentesque elit lectus, semper ut dignissim. <br /><br />
-          <strong>
-            Pellentesque ac eros tristique, suscipit risus a, sodales nisi.
-            Praesent tempor magna at bibendum congue.
-          </strong>
-        </p>
-        <p><strong> Money for nothing.</strong></p>
-      </div>
-
-      <!-- Frame Image -->
-
-      <div id="frame-image">
-        <img
-          src="https://maximebenoit.work/projects/banner-mkr/banner-assets/image.jpg"
-          alt="single image"
-        />
-      </div>
-
-      <!-- Frame Carousel -->
-
-      <div id="frame-carousel">
-        <div class="carousel-cell">
-          <img
-            src="https://maximebenoit.work/projects/banner-mkr/banner-assets/image-carousel-1.jpg"
-            alt="image-carousel"
-          />
-        </div>
-        <div class="carousel-cell">
-          <img
-            src="https://maximebenoit.work/projects/banner-mkr/banner-assets/image-carousel-2.jpg"
-            alt="image-carousel"
-          />
-        </div>
-        <div class="carousel-cell">
-          <img
-            src="https://maximebenoit.work/projects/banner-mkr/banner-assets/image-carousel-3.jpg"
-            alt="image-carousel"
-          />
-        </div>
-      </div>
-
-      <!-- Frame Cta -->
-
-      <div id="frame-cta">
-        <p>
-          Pellentesque ac eros tristique, suscipit risus a, sodales nisi.
-          <strong>Praesent tempor magna.</strong>
-        </p>
-        <button aria-label="call to action">click on this button</button>
-      </div>
-    </div>
 
     <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
@@ -283,29 +209,8 @@ export default function createDoctype() {
 
         // GSAP Timeline
         // We are using "fromTo" method in order to have all values in one place.
-        tl.fromTo("#logo-frame", { x: 0, opacity: 1 }, { x: 0, opacity: 0 })
-          .fromTo("#frame-logo__header", { top: -header.height }, { top: 0 })
-          .fromTo(
-            "#frame-image",
-            { x: 300, ease: EASE, duration: DURATION, delay: DELAY },
-            { x: 0, ease: EASE, duration: DURATION, delay: DELAY }
-          )
-          .fromTo(
-            "#frame-text",
-            { x: 300, ease: EASE, duration: DURATION, delay: DELAY },
-            { x: 0, ease: EASE, duration: DURATION, delay: DELAY }
-          )
-          .fromTo(
-            "#frame-carousel",
-            { x: 300, ease: EASE, duration: DURATION, delay: DELAY },
-            { x: 0, ease: EASE, duration: DURATION, delay: DELAY }
-          )
-          .fromTo(
-            "#frame-cta",
-            { x: 300, ease: EASE, duration: DURATION, delay: DELAY },
-            { x: 0, ease: EASE, duration: DURATION, delay: DELAY }
-          )
-          .fromTo("#frame-cta button", { y: 20, opacity: 0 });
+       
+        //JS Here
 
         // Add markers to mark a precise moment inside the timeline.
         // .add("pauseMarker")
