@@ -1,5 +1,12 @@
 import "../scss/style.scss";
-import createDoctype from "./doctype";
+import {
+  createDoctype,
+  generateLogoCode,
+  generateImageCode,
+  generateTextCode,
+  generateCarouselCode,
+  generateCtaCode,
+} from "./doctype";
 import Packery from "packery";
 import Draggabilly from "draggabilly";
 
@@ -50,83 +57,26 @@ function updateNodeStructure(htmlContent) {
   frames.forEach((frame) => {
     switch (frame) {
       case "logo":
-        console.log("check");
-        additionalJavacript = `
-        tl.fromTo("#logo-frame", { x: 0, opacity: 1 }, { x: 0, opacity: 0 }),
-        tl.fromTo("#frame-logo__header", { top: -header.height }, { top: 0 }),`;
-        additionalHtml = `
-        <div id="frame-logo__header">
-          <img id="logo-header" src="https://maximebenoit.work/projects/banner-mkr/banner-assets/logo-secondary.svg" alt="logo" />
-        </div>
-        <div id="frame-logo">
-          <img id="logo-frame" src="https://maximebenoit.work/projects/banner-mkr/banner-assets/logo.svg" alt="logo" />
-        </div>  
-        `;
+        additionalJavacript = generateLogoCode().js;
+        additionalHtml = generateLogoCode().html;
         break;
       case "image":
-        additionalJavacript = `
-        tl.fromTo("#frame-${frame}",
-        { x: 300, ease: EASE, duration: DURATION, delay: DELAY },
-        { x: 0, ease: EASE, duration: DURATION, delay: DELAY }
-        ),`;
-        additionalHtml = `
-        <div id="frame-image">
-          <img src="https://maximebenoit.work/projects/banner-mkr/banner-assets/image.jpg" alt="single image" />
-        </div>    
-        `;
+        additionalJavacript = generateImageCode().js;
+        additionalHtml = generateImageCode().html;
         break;
       case "text":
-        additionalJavacript = `
-        tl.fromTo("#frame-${frame}",
-        { x: 300, ease: EASE, duration: DURATION, delay: DELAY },
-        { x: 0, ease: EASE, duration: DURATION, delay: DELAY }
-        ),`;
-        additionalHtml = `
-        <div id="frame-text">
-          <p>
-            Donec ipsum nibh, tempus at leo non, pulvinar gravida ipsum.
-            Pellentesque elit lectus, semper ut dignissim. <br /><br />
-            <strong>
-              Pellentesque ac eros tristique, suscipit risus a, sodales nisi.
-              Praesent tempor magna at bibendum congue.
-            </strong>
-          </p>
-          <p><strong> Money for nothing.</strong></p>
-        </div>`;
+        additionalJavacript = generateTextCode().js;
+        additionalHtml = generateTextCode().html;
         break;
       case "carousel":
-        additionalJavacript = `
-          tl.fromTo("#frame-${frame}",
-          { x: 300, ease: EASE, duration: DURATION, delay: DELAY },
-          { x: 0, ease: EASE, duration: DURATION, delay: DELAY }
-          ),`;
-        additionalHtml = `
-        <div id="frame-carousel">
-          <div class="carousel-cell">
-            <img src="https://maximebenoit.work/projects/banner-mkr/banner-assets/image-carousel-1.jpg" alt="image-carousel"/>
-          </div>
-          <div class="carousel-cell">
-            <img src="https://maximebenoit.work/projects/banner-mkr/banner-assets/image-carousel-2.jpg" alt="image-carousel"/>
-          </div>
-          <div class="carousel-cell">
-            <img src="https://maximebenoit.work/projects/banner-mkr/banner-assets/image-carousel-3.jpg" alt="image-carousel"/>
-          </div>
-        </div>`;
+        additionalJavacript = generateCarouselCode().js;
+        additionalHtml = generateCarouselCode().html;
         break;
       case "cta":
-        additionalJavacript = `
-          tl.fromTo("#frame-${frame}",
-          { x: 300, ease: EASE, duration: DURATION, delay: DELAY },
-          { x: 0, ease: EASE, duration: DURATION, delay: DELAY }
-          ),
-          tl.fromTo("#frame-cta button", {y: 20, opacity: 0 }, { y: 0, opacity: 1 })`;
-        additionalHtml = `
-        <div id="frame-cta">
-          <p>Pellentesque ac eros tristique, suscipit risus a, sodales nisi. <strong>Praesent tempor magna.</strong></p>
-          <button aria-label="call to action">click on this button</button>
-        </div>`;
+        additionalJavacript = generateCtaCode().js;
+        additionalHtml = generateCtaCode().html;
         break;
-
+        
       default:
         console.log(`${frame} doesn't seems to be a valid frame :)`);
         break;
@@ -134,12 +84,12 @@ function updateNodeStructure(htmlContent) {
 
     // Insert javascript and html
     htmlContent = htmlContent.replace(
-      "//JS Here",
-      `${additionalJavacript} //JS Here`
+      "// Add js here",
+      `${additionalJavacript} // Add js here`
     );
     htmlContent = htmlContent.replace(
-      "//HTML Here",
-      `${additionalHtml} //HTML Here`
+      "<!-- Add HTML here -->",
+      `${additionalHtml} <!-- Add HTML here -->`
     );
   });
 
