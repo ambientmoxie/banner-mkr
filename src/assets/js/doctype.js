@@ -79,14 +79,14 @@ function createDoctype() {
           inset: 0;
         }
   
-        #frame-image,
-        #frame-text,
-        #frame-carousel,
-        #frame-cta {
+        .frame-image,
+        .frame-text,
+        .frame-carousel,
+        .frame-cta {
           z-index: 1; /* All frames need to remain under the logo frame */
         }
   
-        #frame-logo {
+        .frame-logo {
           width: var(--banner-width);
           height: var(--banner-height);
           display: flex;
@@ -96,12 +96,12 @@ function createDoctype() {
           z-index: 2;
         }
   
-        #frame-logo img {
+        .frame-logo img {
           width: 100%;
           height: auto;
         }
   
-        #frame-text {
+        .frame-text {
           display: flex;
           justify-content: center;
           background-color: var(--color-wht);
@@ -110,7 +110,7 @@ function createDoctype() {
           padding: 15px;
         }
   
-        #frame-cta {
+        .frame-cta {
           display: flex;
           flex-direction: column;
           justify-content: center;
@@ -120,12 +120,12 @@ function createDoctype() {
           gap: 15px;
         }
   
-        #frame-cta p {
+        .frame-cta p {
           max-width: 70%;
           text-align: center;
         }
   
-        #frame-cta button {
+        .frame-cta button {
           padding: 10px 20px;
           background-color: var(--color-blk);
           color: var(--color-wht);
@@ -158,14 +158,20 @@ function createDoctype() {
       <script>
         document.addEventListener("DOMContentLoaded", (event) => {
   
-          // Init carousel
-          var elem = document.querySelector("#frame-carousel");
+          // Init carousel(s)
+          const carousels = document.querySelectorAll(".frame-carousel");
+          
           const carouselOptions = {
             cellAlign: "left",
             contain: true,
           };
-          var flkty = new Flickity(elem, carouselOptions);
-  
+
+          if (carousels.length > 0) {
+            carousels.forEach(function (carousel) {
+              new Flickity(carousel, carouselOptions);
+            });
+          }
+          
           // Delay between frames
           const DELAY = 1;
           const DURATION = 1;
@@ -214,18 +220,18 @@ function generateLogoCode(index) {
 
   const logoFrameCode = {
     html: `
-    <div id="frame-logo">
+    <div id="frame-logo-${index}" class="frame-logo">
       <img id="logo" src="https://maximebenoit.work/projects/banner-mkr/banner-assets/logo.svg" alt="logo"/>
     </div> 
     `,
     js: `
     tl.fromTo(
-      "#frame-logo",
+      "#frame-logo-${index}",
       { x: ${startingPosition}, ease: EASE, duration: DURATION },
       { x: 0, ease: EASE, duration: DURATION, delay: DELAY }
     );
     tl.fromTo(
-      "#frame-logo img",
+      "#frame-logo-${index} img",
       { scale: 0.5 },
       { scale: 0.22, y: -105, x: -105 }
     );`,
@@ -237,13 +243,13 @@ function generateImageCode(index) {
   startingPosition = index == 0 ? index : "300";
   const imageFrameCode = {
     html: `
-    <div id="frame-image">
+    <div id="frame-image-${index}" class="frame-image">
       <img src="https://maximebenoit.work/projects/banner-mkr/banner-assets/image.jpg" alt="single image" />
     </div>
     `,
     js: `
     tl.fromTo(
-      "#frame-image",
+      "#frame-image-${index}",
       { x: ${startingPosition}, ease: EASE, duration: DURATION },
       { x: 0, ease: EASE, duration: DURATION, delay: DELAY }
     );`,
@@ -255,7 +261,7 @@ function generateTextCode(index) {
   startingPosition = index == 0 ? index : "300";
   const textFrameCode = {
     html: `
-    <div id="frame-text">
+    <div id="frame-text-${index}" class="frame-text">
       <p>
         Donec ipsum nibh, tempus at leo non, pulvinar gravida ipsum. Pellentesque elit lectus, semper ut dignissim.
         <br/><br/>
@@ -268,7 +274,7 @@ function generateTextCode(index) {
     `,
     js: `
     tl.fromTo(
-      "#frame-text",
+      "#frame-text-${index}",
       { x: ${startingPosition}, ease: EASE, duration: DURATION },
       { x: 0, ease: EASE, duration: DURATION, delay: DELAY }
     );`,
@@ -280,7 +286,7 @@ function generateCarouselCode(index) {
   startingPosition = index == 0 ? index : "300";
   const carouselFrameCode = {
     html: `
-    <div id="frame-carousel">
+    <div id="frame-carousel-${index}" class="frame-carousel">
       <div class="carousel-cell">
         <img src="https://maximebenoit.work/projects/banner-mkr/banner-assets/image-carousel-1.jpg" alt="image-carousel" />
       </div>
@@ -294,7 +300,7 @@ function generateCarouselCode(index) {
     `,
     js: `
     tl.fromTo(
-      "#frame-carousel",
+      "#frame-carousel-${index}",
       { x: ${startingPosition}, ease: EASE, duration: DURATION },
       { x: 0, ease: EASE, duration: DURATION, delay: DELAY }
     );`,
@@ -306,7 +312,7 @@ function generateCtaCode(index) {
   startingPosition = index == 0 ? index : "300";
   const ctaFrameCode = {
     html: `
-    <div id="frame-cta">
+    <div id="frame-cta-${index}" class="frame-cta">
       <p>
         Pellentesque ac eros tristique, suscipit risus a, sodales nisi.
         <strong>Praesent tempor magna.</strong>
@@ -316,12 +322,12 @@ function generateCtaCode(index) {
     `,
     js: `
     tl.fromTo(
-      "#frame-cta",
+      "#frame-cta-${index}",
       { x: ${startingPosition}, ease: EASE, duration: DURATION },
       { x: 0, ease: EASE, duration: DURATION, delay: DELAY }
     );
     tl.fromTo(
-      "#frame-cta button",
+      "#frame-cta-${index} button",
       { y: 20, opacity: 0 },
       { y: 0, opacity: 1 }
     );`,
