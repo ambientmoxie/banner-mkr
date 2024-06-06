@@ -1,3 +1,5 @@
+// TODO: refactore
+
 import "../scss/style.scss";
 import {
   createDoctype,
@@ -54,27 +56,27 @@ function updateNodeStructure(htmlContent) {
   let additionalJavacript;
   let additionalHtml;
 
-  frames.forEach((frame) => {
+  frames.forEach((frame, index) => {
     switch (frame) {
       case "logo":
-        additionalJavacript = generateLogoCode().js;
-        additionalHtml = generateLogoCode().html;
+        additionalJavacript = generateLogoCode(index).js;
+        additionalHtml = generateLogoCode(index).html;
         break;
       case "image":
-        additionalJavacript = generateImageCode().js;
-        additionalHtml = generateImageCode().html;
+        additionalJavacript = generateImageCode(index).js;
+        additionalHtml = generateImageCode(index).html;
         break;
       case "text":
-        additionalJavacript = generateTextCode().js;
-        additionalHtml = generateTextCode().html;
+        additionalJavacript = generateTextCode(index).js;
+        additionalHtml = generateTextCode(index).html;
         break;
       case "carousel":
-        additionalJavacript = generateCarouselCode().js;
-        additionalHtml = generateCarouselCode().html;
+        additionalJavacript = generateCarouselCode(index).js;
+        additionalHtml = generateCarouselCode(index).html;
         break;
       case "cta":
-        additionalJavacript = generateCtaCode().js;
-        additionalHtml = generateCtaCode().html;
+        additionalJavacript = generateCtaCode(index).js;
+        additionalHtml = generateCtaCode(index).html;
         break;
         
       default:

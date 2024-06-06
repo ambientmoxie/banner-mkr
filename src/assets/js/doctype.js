@@ -182,7 +182,7 @@ function createDoctype() {
           }
   
           // Init GSAP timeline
-          let tl = gsap.timeline({ delay: 1 });
+          let tl = gsap.timeline({ delay: 0 });
   
           // Add js here
   
@@ -207,7 +207,11 @@ function createDoctype() {
   `;
 }
 
-function generateLogoCode() {
+let startingPosition;
+
+function generateLogoCode(index) {
+  startingPosition = index == 0 ? index : "300";
+
   const logoFrameCode = {
     html: `
     <div id="frame-logo">
@@ -215,6 +219,11 @@ function generateLogoCode() {
     </div> 
     `,
     js: `
+    tl.fromTo(
+      "#frame-logo",
+      { x: ${startingPosition}, ease: EASE, duration: DURATION },
+      { x: 0, ease: EASE, duration: DURATION, delay: DELAY }
+    );
     tl.fromTo(
       "#frame-logo img",
       { scale: 0.5 },
@@ -224,7 +233,8 @@ function generateLogoCode() {
   return logoFrameCode;
 }
 
-function generateImageCode() {
+function generateImageCode(index) {
+  startingPosition = index == 0 ? index : "300";
   const imageFrameCode = {
     html: `
     <div id="frame-image">
@@ -234,14 +244,15 @@ function generateImageCode() {
     js: `
     tl.fromTo(
       "#frame-image",
-      { x: 300, ease: EASE, duration: DURATION },
+      { x: ${startingPosition}, ease: EASE, duration: DURATION },
       { x: 0, ease: EASE, duration: DURATION, delay: DELAY }
     );`,
   };
   return imageFrameCode;
 }
 
-function generateTextCode() {
+function generateTextCode(index) {
+  startingPosition = index == 0 ? index : "300";
   const textFrameCode = {
     html: `
     <div id="frame-text">
@@ -258,14 +269,15 @@ function generateTextCode() {
     js: `
     tl.fromTo(
       "#frame-text",
-      { x: 300, ease: EASE, duration: DURATION },
+      { x: ${startingPosition}, ease: EASE, duration: DURATION },
       { x: 0, ease: EASE, duration: DURATION, delay: DELAY }
     );`,
   };
   return textFrameCode;
 }
 
-function generateCarouselCode() {
+function generateCarouselCode(index) {
+  startingPosition = index == 0 ? index : "300";
   const carouselFrameCode = {
     html: `
     <div id="frame-carousel">
@@ -283,14 +295,15 @@ function generateCarouselCode() {
     js: `
     tl.fromTo(
       "#frame-carousel",
-      { x: 300, ease: EASE, duration: DURATION },
+      { x: ${startingPosition}, ease: EASE, duration: DURATION },
       { x: 0, ease: EASE, duration: DURATION, delay: DELAY }
     );`,
   };
   return carouselFrameCode;
 }
 
-function generateCtaCode() {
+function generateCtaCode(index) {
+  startingPosition = index == 0 ? index : "300";
   const ctaFrameCode = {
     html: `
     <div id="frame-cta">
@@ -304,7 +317,7 @@ function generateCtaCode() {
     js: `
     tl.fromTo(
       "#frame-cta",
-      { x: 300, ease: EASE, duration: DURATION },
+      { x: ${startingPosition}, ease: EASE, duration: DURATION },
       { x: 0, ease: EASE, duration: DURATION, delay: DELAY }
     );
     tl.fromTo(
