@@ -13,6 +13,8 @@ import {
 import Packery from "packery";
 import Draggabilly from "draggabilly";
 
+// Import logos
+
 const downloadBtn = document.getElementById("bmkr-footer__download-button");
 
 downloadBtn.addEventListener("click", () => {
@@ -171,12 +173,22 @@ addButton.addEventListener("click", (e) => {
   //   : "Show frame selector";
 });
 
+
+// function getImageUrl(type) {
+//   return new URL(`./icons/${type}-ico.svg`, import.meta.url).href
+// }
+
 // We are using the select type to generate the corresponding block
 function createBlockType(type) {
+
+  console.log('Type:', type); // Debug: Check the type value
+
   const block = document.createElement("div");
   block.className = "timeline-area__block";
   block.setAttribute("data-type", `${type}`);
-  block.innerHTML = `<img src="/icons/${type}-ico.svg" alt="${type} icon"><span>${type}</span>`;
+
+  // Hard-coded URL...import.meta.url returns undefined
+  block.innerHTML = `<img src="/projects/banner-mkr/icons/${type}-ico.svg" alt="${type} icon"><span>${type}</span>`;
   return block;
 }
 
