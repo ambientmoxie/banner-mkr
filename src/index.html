@@ -6,6 +6,7 @@
     <title>banner maker</title>
   </head>
   <body>
+    <button id="terms-btn" class="floating-btn">Terms</button>
     <div id="bmkr-container">
       <header id="bmkr-header">
         <img
@@ -98,8 +99,52 @@
       </button>
     </aside>
 
-    <div id="terms"></div>
+    <div id="terms-container">
+      <div id="terms">
+        <h2>Disclaimer:</h2>
 
+        <p>
+          This website has been created to facilitate the setup of traditional
+          HTML5 animated banners. The output is a very basic HTML structure with
+          a minimal GSAP timeline. This tool is a work in progress.
+        </p>
+        <h2>How to use:</h2>
+
+        <ul id="manual">
+          <li class="manual-el">
+            Click and drag to change the order of blocks/frames.
+          </li>
+          <li class="manual-el">
+            Edit the timeline by clicking the "add" or "delete" buttons.
+          </li>
+          <li class="manual-el">
+            Download your HTML banner when you are done.
+          </li>
+        </ul>
+
+        <h2>Legal:</h2>
+
+        <p>
+          This website uses only essential cookies required for proper
+          functionality and security. It does not use cookies for tracking or
+          marketing, and no personal data is collected or shared.
+          <br /><br />
+          This tool is using
+          <a href="https://gsap.com/" target="_blank">GSAP</a> for javascript
+          animation and
+          <a href="https://flickity.metafizzy.co/">flickity</a> for carousels.
+          It is obviously free and the entire code is available on
+          <a href="https://github.com/ambientmoxie/banner-mkr">GitHub</a>. Feel
+          free to use, contribute, or utilize it in any way you need.
+        </p>
+
+        <h2>Contact:</h2>
+
+        <a href="mailto:contact@maximebenoit.work">contact@maximebenoit.work</a>
+      </div>
+
+      <button id="close-btn" class="floating-btn">Close</button>
+    </div>
 
     <script type="module" src="./assets/js/main.js"></script>
   </body>

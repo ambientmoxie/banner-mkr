@@ -40,15 +40,15 @@ $color-light-grey: #cccccc;
   -webkit-text-size-adjust: 100%;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
+// a {
+//   font-weight: 500;
+//   color: #646cff;
+//   text-decoration: inherit;
+// }
 
-a:hover {
-  color: #535bf2;
-}
+// a:hover {
+//   color: #535bf2;
+// }
 
 html {
   box-sizing: border-box;
@@ -128,8 +128,17 @@ h2 {
   font-size: $font-size-rg;
 }
 
-p {
+p,
+ul li,
+a {
   font-size: $font-size-rg;
+  color: $color-dark-grey;
+}
+
+a {
+  font-size: $font-size-rg;
+  color: $color-accent;
+  text-decoration: none;
 }
 
 #bmkr-footer__wording {
@@ -202,3 +211,46 @@ aside {
 
 // Terms
 
+#terms-container {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-color: $color-white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+
+#terms {
+  max-width: 450px;
+  > *:not(:last-child) {
+    padding-bottom: calc($spacing-md - $spacing-sm);
+  }
+}
+
+ul#manual {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  counter-reset: my-counter;
+  li::before {
+    counter-increment: my-counter;
+    content: counter(my-counter) ". ";
+  }
+}
+
+.floating-btn {
+  position: fixed;
+  font-size: 1.4rem;
+  top: 1.5rem;
+  right: 1.5rem;
+  display: block;
+  border: none;
+  padding: 0;
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  color: $color-dark-grey;
+}

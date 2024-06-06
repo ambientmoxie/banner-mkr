@@ -78,7 +78,7 @@ function updateNodeStructure(htmlContent) {
         additionalJavacript = generateCtaCode(index).js;
         additionalHtml = generateCtaCode(index).html;
         break;
-        
+
       default:
         console.log(`${frame} doesn't seems to be a valid frame :)`);
         break;
@@ -208,4 +208,18 @@ deleteButton.addEventListener("click", (e) => {
   e.target.innerText = deleteMode
     ? "Disable delete mode"
     : "Enable delete mode";
+});
+
+// Display Terms
+
+const openTermsButton = document.getElementById("terms-btn");
+const closeTermsButton = document.getElementById("close-btn");
+const termsScreen = document.getElementById("terms-container");
+
+openTermsButton.addEventListener("click", (e) => {
+  termsScreen.style.display = "flex";
+});
+
+closeTermsButton.addEventListener("click", (e) => {
+  termsScreen.style.display = "none";
 });
