@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "draggabilly": "^3.0.0",
+    "mobile-device-detect": "^0.4.3",
     "packery": "^2.1.2"
   }
 }

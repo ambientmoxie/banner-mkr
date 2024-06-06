@@ -1,6 +1,7 @@
 // TODO: refactore
 
 import "../scss/style.scss";
+import { isMobile } from "mobile-device-detect";
 import {
   createDoctype,
   generateLogoCode,
@@ -223,3 +224,14 @@ openTermsButton.addEventListener("click", (e) => {
 closeTermsButton.addEventListener("click", (e) => {
   termsScreen.style.display = "none";
 });
+
+// Is Mobile ?
+
+if (isMobile) {
+  document.querySelector("main").remove();
+  const div = document.createElement("div");
+  const p = document.createElement("p");
+  p.textContent = "This website is not visible on mobile device.";
+  div.appendChild(p);
+  document.body.appendChild(div);
+}

@@ -5,146 +5,154 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>banner maker</title>
   </head>
-  <body>
-    <button id="terms-btn" class="floating-btn">Terms</button>
-    <div id="bmkr-container">
-      <header id="bmkr-header">
-        <img
-          id="bmkr-header__illustration"
-          src="/illustration.png"
-          alt="banner.mkr illustration"
-        />
-        <h1 id="bmkr-header__wording">
-          <span>banner.mkr</span> is a simple tool to create and download simple
-          animated banner
-        </h1>
-      </header>
-      <main id="timeline-area">
-        <section>
-          <h2 id="timeline-area__wording">Timeline current stack:</h2>
-          <div id="timeline-area__blocks">
-            <div class="gutter-sizer"></div>
-            <div class="timeline-area__block" data-type="logo">
-              <img src="/icons/logo-ico.svg" alt="logo icon" />
-              <span>Logo</span>
+  <body> 
+
+    <main>
+      <button id="terms-btn" class="floating-btn">Terms</button>
+      <div id="bmkr-container">
+        <header id="bmkr-header">
+          <img
+            id="bmkr-header__illustration"
+            src="/illustration.png"
+            alt="banner.mkr illustration"
+          />
+          <h1 id="bmkr-header__wording">
+            <span>banner.mkr</span> is a simple tool to create and download
+            simple animated banner
+          </h1>
+        </header>
+        <main id="timeline-area">
+          <section>
+            <h2 id="timeline-area__wording">Timeline current stack:</h2>
+            <div id="timeline-area__blocks">
+              <div class="gutter-sizer"></div>
+              <div class="timeline-area__block" data-type="logo">
+                <img src="/icons/logo-ico.svg" alt="logo icon" />
+                <span>Logo</span>
+              </div>
+              <div class="timeline-area__block" data-type="image">
+                <img src="/icons/image-ico.svg" alt="image icon" />
+                <span>Image</span>
+              </div>
+              <div class="timeline-area__block" data-type="text">
+                <img src="/icons/text-ico.svg" alt="text icon" />
+                <span>Text</span>
+              </div>
+              <div class="timeline-area__block" data-type="carousel">
+                <img src="/icons/carousel-ico.svg" alt="carousel icon" />
+                <span>Carousel</span>
+              </div>
+              <div class="timeline-area__block" data-type="cta">
+                <img src="/icons/cta-ico.svg" alt="cta icon" />
+                <span>Cta</span>
+              </div>
             </div>
-            <div class="timeline-area__block" data-type="image">
-              <img src="/icons/image-ico.svg" alt="image icon" />
-              <span>Image</span>
+            <div id="timeline-area__buttons">
+              <button
+                class="timeline-area__btn"
+                id="timeline-area__add-btn"
+                aria-label="Add Block"
+              >
+                Add frames
+              </button>
+              <button
+                class="timeline-area__btn"
+                id="timeline-area__delete-btn"
+                aria-label="Delete Block"
+              >
+                Enable delete mode
+              </button>
+              <!-- <button class="timeline-area__btn" id="timeline-area__edit-btn" aria-label="Edit Block">Edit</button> -->
             </div>
-            <div class="timeline-area__block" data-type="text">
-              <img src="/icons/text-ico.svg" alt="text icon" />
-              <span>Text</span>
-            </div>
-            <div class="timeline-area__block" data-type="carousel">
-              <img src="/icons/carousel-ico.svg" alt="carousel icon" />
-              <span>Carousel</span>
-            </div>
-            <div class="timeline-area__block" data-type="cta">
-              <img src="/icons/cta-ico.svg" alt="cta icon" />
-              <span>Cta</span>
-            </div>
-          </div>
-          <div id="timeline-area__buttons">
-            <button
-              class="timeline-area__btn"
-              id="timeline-area__add-btn"
-              aria-label="Add Block"
-            >
-              Add frames
-            </button>
-            <button
-              class="timeline-area__btn"
-              id="timeline-area__delete-btn"
-              aria-label="Delete Block"
-            >
-              Enable delete mode
-            </button>
-            <!-- <button class="timeline-area__btn" id="timeline-area__edit-btn" aria-label="Edit Block">Edit</button> -->
-          </div>
-        </section>
-      </main>
+          </section>
+        </main>
 
-      <footer id="bmkr-footer">
-        <h2 id="bmkr-footer__wording">Is your banner ready?</h2>
-        <button id="bmkr-footer__download-button" aria-label="Download Banner">
-          Download
-        </button>
-      </footer>
-    </div>
-    <aside>
-      <button id="create-logo-btn" data-type="logo" aria-label="create logo">
-        <span>Logo</span>
-        <img src="/icons/logo-ico.svg" alt="logo icon" />
-      </button>
-      <button id="create-img-btn" data-type="image" aria-label="create image">
-        <span>Image</span>
-        <img src="/icons/image-ico.svg" alt="image icon" />
-      </button>
-      <button id="create-txt-btn" data-type="text" aria-label="create button">
-        <span>Text</span>
-        <img src="/icons/text-ico.svg" alt="text icon" />
-      </button>
-      <button
-        id="create-carousel-btn"
-        data-type="carousel"
-        aria-label="create carousel"
-      >
-        <span>Carousel</span>
-        <img src="/icons/carousel-ico.svg" alt="carousel icon" />
-      </button>
-      <button id="create-txt-btn" data-type="cta" aria-label="create cta">
-        <span>Cta</span>
-        <img src="/icons/cta-ico.svg" alt="text icon" />
-      </button>
-    </aside>
-
-    <div id="terms-container">
-      <div id="terms">
-        <h2>Disclaimer:</h2>
-
-        <p>
-          This website has been created to facilitate the setup of traditional
-          HTML5 animated banners. The output is a very basic HTML structure with
-          a minimal GSAP timeline. This tool is a work in progress.
-        </p>
-        <h2>How to use:</h2>
-
-        <ul id="manual">
-          <li class="manual-el">
-            Click and drag to change the order of blocks/frames.
-          </li>
-          <li class="manual-el">
-            Edit the timeline by clicking the "add" or "delete" buttons.
-          </li>
-          <li class="manual-el">
-            Download your HTML banner when you are done.
-          </li>
-        </ul>
-
-        <h2>Legal:</h2>
-
-        <p>
-          This website uses only essential cookies required for proper
-          functionality and security. It does not use cookies for tracking or
-          marketing, and no personal data is collected or shared.
-          <br /><br />
-          This tool is using
-          <a href="https://gsap.com/" target="_blank">GSAP</a> for javascript
-          animation and
-          <a href="https://flickity.metafizzy.co/">flickity</a> for carousels.
-          It is obviously free and the entire code is available on
-          <a href="https://github.com/ambientmoxie/banner-mkr">GitHub</a>. Feel
-          free to use, contribute, or utilize it in any way you need.
-        </p>
-
-        <h2>Contact:</h2>
-
-        <a href="mailto:contact@maximebenoit.work">contact@maximebenoit.work</a>
+        <footer id="bmkr-footer">
+          <h2 id="bmkr-footer__wording">Is your banner ready?</h2>
+          <button
+            id="bmkr-footer__download-button"
+            aria-label="Download Banner"
+          >
+            Download
+          </button>
+        </footer>
       </div>
+      <aside>
+        <button id="create-logo-btn" data-type="logo" aria-label="create logo">
+          <span>Logo</span>
+          <img src="/icons/logo-ico.svg" alt="logo icon" />
+        </button>
+        <button id="create-img-btn" data-type="image" aria-label="create image">
+          <span>Image</span>
+          <img src="/icons/image-ico.svg" alt="image icon" />
+        </button>
+        <button id="create-txt-btn" data-type="text" aria-label="create button">
+          <span>Text</span>
+          <img src="/icons/text-ico.svg" alt="text icon" />
+        </button>
+        <button
+          id="create-carousel-btn"
+          data-type="carousel"
+          aria-label="create carousel"
+        >
+          <span>Carousel</span>
+          <img src="/icons/carousel-ico.svg" alt="carousel icon" />
+        </button>
+        <button id="create-txt-btn" data-type="cta" aria-label="create cta">
+          <span>Cta</span>
+          <img src="/icons/cta-ico.svg" alt="text icon" />
+        </button>
+      </aside>
 
-      <button id="close-btn" class="floating-btn">Close</button>
-    </div>
+      <div id="terms-container">
+        <div id="terms">
+          <h2>Disclaimer:</h2>
+
+          <p>
+            This website has been created to facilitate the setup of traditional
+            HTML5 animated banners. The output is a very basic HTML structure
+            with a minimal GSAP timeline. This tool is a work in progress.
+          </p>
+          <h2>How to use:</h2>
+
+          <ul id="manual">
+            <li class="manual-el">
+              Click and drag to change the order of blocks/frames.
+            </li>
+            <li class="manual-el">
+              Edit the timeline by clicking the "add" or "delete" buttons.
+            </li>
+            <li class="manual-el">
+              Download your HTML banner when you are done.
+            </li>
+          </ul>
+
+          <h2>Legal:</h2>
+
+          <p>
+            This website uses only essential cookies required for proper
+            functionality and security. It does not use cookies for tracking or
+            marketing, and no personal data is collected or shared.
+            <br /><br />
+            This tool is using
+            <a href="https://gsap.com/" target="_blank">GSAP</a> for javascript
+            animation and
+            <a href="https://flickity.metafizzy.co/">flickity</a> for carousels.
+            It is obviously free and the entire code is available on
+            <a href="https://github.com/ambientmoxie/banner-mkr">GitHub</a>.
+            Feel free to use, contribute, or utilize it in any way you need.
+          </p>
+
+          <h2>Contact:</h2>
+
+          <a href="mailto:contact@maximebenoit.work"
+            >contact@maximebenoit.work</a
+          >
+        </div>
+
+        <button id="close-btn" class="floating-btn">Close</button>
+      </div>
+    </main>
 
     <script type="module" src="./assets/js/main.js"></script>
   </body>
